@@ -37,6 +37,11 @@ function App() {
   const numRemainingTodos = todos.filter((todo) => todo.completed).length;
 
   // 5. 할 일 삭제 - 목록에서 특징 할 일을 삭제하는 기능
+  const 할일삭제하기 = (todo) => {
+    // 삭제를 불변성 유지하면서 하도록
+    // filter
+    setTodos(todos.filter((todo) => todo !== todo));
+  };
   // 6. 할 일 수정 - 이미 입력된 할 일의 내용을 수정하는 기능
   // 7. 할 일 필터링 - 이미 완료된 할 일과 진행중인 할일을 구분하여 볼 수 있는 필 터 기능
   // 8. 하일 일괄 완료 처리 - 모든 할 일을 한번엔 완료 처리할 수 있는 기능
@@ -46,15 +51,14 @@ function App() {
   return (
     <>
       <input type="text" placeholder="할일을 입력해주세요." onKeyDown={할일추가} />
-
       {/* // 2. 할 일 목록 표시 - 입력된 할 일을 목록 형태로 보여주는 기능 */}
       {todos.map((todo) => (
         <div key={todo.key}>{todo.title}</div>
       ))}
       {todos.map((todo) => (
         <input key={todo.key} type="checkBox" checked={todo.completed} onChange={할일완료토글} />
-      ))}
-
+      ))}{' '}
+      <button onClick={할일삭제하기}>삭제</button>
       <div>남은 할일 : {numRemainingTodos}</div>
     </>
   );
